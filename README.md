@@ -24,7 +24,7 @@ To date all three major platforms (windows, linux, osx) are supported, if you bu
 building
 ========
 
-A scons (http://www.scons.org/) build script is provided. kl-iostream depends on
+A scons (http://www.scons.org/) build script is provided. kl-iostream purely depends on C++ standard libraries.
 
 To inform scons where to find the Fabric Engine includes as well as the thirdparty libraries, you need to set the following environment variables:
 
