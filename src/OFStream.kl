@@ -1,0 +1,19 @@
+/*
+ *  Copyright 2010-2014 Fabric Software Inc. All rights reserved.
+ */
+
+object OFStream {
+  Data handle;
+};
+
+function OFStream() = "OFStream_construct";
+function ~OFStream() = "OFStream_destruct";
+inline OFStream(String fileName) {
+  this = OFStream();
+  this.open(fileName);
+}
+
+function Boolean OFStream.is_open() = "OFStream_is_open";
+function Boolean OFStream.open(String fileName) = "OFStream_open";
+function OFStream.close() = "OFStream_close";
+function OFStream.write_line(String text) = "OFStream_write_line";

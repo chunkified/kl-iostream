@@ -1,0 +1,32 @@
+#
+# Copyright 2010-2014 Fabric Software Inc. All rights reserved.
+#
+Import('parentEnv', 'kl2edk', 'kl', 'extSuffix')
+
+extName = 'kliostream'
+
+env = parentEnv.Clone()
+env.Append(CPPPATH = [env.Dir('.').abspath])
+
+sources = [
+  env.File('kliostream.fpm.json'),
+  env.File('kliostream.codegen.json')
+]
+sources += env.Glob('*.kl')
+
+cppFiles = [
+  env.File('extension.cpp'),
+  env.File('IFStream_functions.cpp'),
+  env.File('OFStream_functions.cpp')
+]
+
+extensionFiles = env.Install(env.Dir('#stage'), [env.File(extName+'.fpm.json')] + env.Glob('*.kl'))
+kl2edkResults = env.RunKL2EDK(cppFiles, sources)
+
+extLibFileName = env.File(extName + '-' + extSuffix)
+libraryFiles = Flatten([env.SharedLibrary(extLibFileName, cppFiles)])
+env.Depends(libraryFiles, kl2edkResults)
+
+extensionFiles += env.Install(env.Dir('#stage'), libraryFiles[0])
+
+Return('extensionFiles')

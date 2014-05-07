@@ -1,0 +1,21 @@
+require kliostream;
+
+operator entry() {
+  OFStream oStream('data/02_io.txt');
+  report(oStream.is_open());
+  oStream.write_line('line 01');
+  oStream.write_line('line 02');
+  oStream.write_line('line 03');
+  oStream.write_line('line 04');
+  oStream.close();
+
+  IFStream iStream('data/02_io.txt');
+  report(iStream.is_open());
+  report(iStream.read_line());
+  report(iStream.read_line());
+  report(iStream.read_line());
+  report(iStream.read_line());
+  report(iStream.read_line());
+  report(iStream.eof());
+  iStream.close();
+}

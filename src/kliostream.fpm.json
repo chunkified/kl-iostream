@@ -1,0 +1,7 @@
+{
+  "libs": "kliostream",
+  "code": [
+    "IFStream.kl",
+    "OFStream.kl"
+  ]
+}

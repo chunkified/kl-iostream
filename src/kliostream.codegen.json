@@ -1,0 +1,74 @@
+{
+  "header": "
+#include \"macros.h\"
+#include \"conversion.h\"
+  ",
+  "parameterprefix": "c",
+  "functionentry": "IOSTREAM_TRY_STATEMENT", 
+  "functionexit": "IOSTREAM_CATCH_STATEMENT", 
+  "functionexitreturn": "IOSTREAM_CATCH_STATEMENT_RETURN",
+  "typemapping": {
+    "Boolean": {
+      "ctype": "bool",
+      "from": "conv_from_baseType<KL::Boolean, bool>",
+      "to": "conv_to_baseType<KL::Boolean, bool>",
+      "defaultvalue": "false"
+    },
+    "String": {
+      "ctype": "std::string",
+      "from": "conv_from_String",
+      "to": "conv_to_String",
+      "defaultvalue": "\"\""
+    },
+    "IFStream": {
+      "ctype": "std::ifstream *",
+      "from": "conv_from_StdC<KL::IFStream, std::ifstream>",
+      "to": "conv_to_StdC<KL::IFStream, std::ifstream>",
+      "methodop": "->",
+      "dereferenceasmethodparam": true
+    },
+    "OFStream": {
+      "ctype": "std::ofstream *",
+      "from": "conv_from_StdC<KL::OFStream, std::ofstream>",
+      "to": "conv_to_StdC<KL::OFStream, std::ofstream>",
+      "methodop": "->",
+      "dereferenceasmethodparam": true
+    }
+  },
+  "functionbodies": {
+    "IFStream_construct": "
+  this_->handle = new std::ifstream();
+    ",
+    "IFStream_destruct": "
+  if(this_->handle != NULL)
+    delete((std::ifstream*)this_->handle);
+    ",
+    "IFStream_open": "
+  cThis_->open(cFileName.c_str());
+  return cThis_->is_open();
+    ",
+    "IFStream_read_line": "
+  std::string c_result;
+  getline(*cThis_, c_result);
+  conv_to_String(c_result, _result);
+    ",
+    "OFStream_construct": "
+  this_->handle = new std::ofstream();
+    ",
+    "OFStream_destruct": "
+  if(this_->handle != NULL)
+    delete((std::ofstream*)this_->handle);
+    ",
+    "OFStream_open": "
+  cThis_->open(cFileName.c_str());
+  return cThis_->is_open();
+    ",
+    "OFStream_write_line": "
+  *cThis_ << cText + \"\\n\";
+    "
+  },
+  "methodmapping": {
+    "IFStream_is_open": "is_open",
+    "OFStream_is_open": "is_open"
+  }
+}

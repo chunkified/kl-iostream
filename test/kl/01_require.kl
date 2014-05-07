@@ -1,0 +1,5 @@
+require kliostream;
+
+operator entry() {
+  report('completed!'); 
+}
