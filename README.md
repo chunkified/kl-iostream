@@ -9,6 +9,10 @@ extension status
 
 This extension has been built and tested against Fabric Engine 1.11.4. Higher release might work, but this hasn't been validated. Feel free to use this code for reference or training purposes, it's meant to be an example of how to integrate custom libraries into KL.
 
+kl-iostream currently only supports reading and writing of ascii content.
+
+kl-iostream is not thread-safe, thus you will need to ensure to only call it from the main thread.
+
 structure
 =========
 
